@@ -5,7 +5,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
-var botClient = new TelegramBotClient("5443542517:AAHu17EY5R92Xnq4qMVpSmcWIRz9BuSP8tA");
+var botClient = new TelegramBotClient("5443542517:AAHu17EY5R92Xnq4qMVpSmcWIRz9BuSP8tA"); //токен
 
 using var cts = new CancellationTokenSource();
 Message sentMessage;
@@ -56,7 +56,7 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
     {
     sentMessage = await botClient.SendTextMessageAsync(
     chatId: chatId,
-    text: "Да кто такой этот Артур",
+    text: "Да кто такой этот Артур, блять",
     cancellationToken: cancellationToken);
     }
 
@@ -91,7 +91,7 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
     {
         sentMessage = await botClient.SendTextMessageAsync(
         chatId: chatId,
-        text: "это чо, я не понял",
+        text: "нормально разговаривай",
         cancellationToken: cancellationToken);
     }
 
