@@ -45,7 +45,7 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
 
     ReplyKeyboardMarkup replyKeyboardMarkup = new(new[]
     {
-        new KeyboardButton[] { "Артур", "Курс", "Кто ты", "/help" }, adadadadsadadada
+        new KeyboardButton[] { "Артур", "Курс", "Кто ты", "/help" }, 
     })
     {
         ResizeKeyboard = true
