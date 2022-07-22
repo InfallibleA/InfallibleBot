@@ -3,9 +3,9 @@ using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 
-
-var botClient = new TelegramBotClient("5443542517:AAEvPuC_qRra_Wh7Th-VjV5L2ZbJ8Q1ekuo");
+var botClient = new TelegramBotClient("5443542517:AAHu17EY5R92Xnq4qMVpSmcWIRz9BuSP8tA");
 
 using var cts = new CancellationTokenSource();
 Message sentMessage;
@@ -31,7 +31,6 @@ cts.Cancel();
 
 async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
 {
-    // Only process Message updates: https://core.telegram.org/bots/api#message
     if (update.Message is not { } message)
         return;
     // Only process text messages
@@ -43,6 +42,15 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
     Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
 
     // Echo received message text
+
+    ReplyKeyboardMarkup replyKeyboardMarkup = new(new[]
+    {
+        new KeyboardButton[] { "Артур", "Курс", "Кто ты", "/help" },
+    })
+    {
+        ResizeKeyboard = true
+    };
+    
 
     if (messageText == "Артур") 
     {
@@ -71,7 +79,7 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
         cancellationToken: cancellationToken);
     }
 
-    if (messageText == "кто ты")
+    if (messageText == "Кто ты")
     {
         sentMessage = await botClient.SendTextMessageAsync(
         chatId: chatId,
@@ -79,13 +87,19 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
         cancellationToken: cancellationToken);
     }
 
-    if (messageText != "/help" && messageText != "Курс" && messageText != "Артур" && messageText != "кто ты")
+    if (messageText != "/help" && messageText != "Курс" && messageText != "Артур" && messageText != "Кто ты")
     {
         sentMessage = await botClient.SendTextMessageAsync(
         chatId: chatId,
         text: "это чо, я не понял",
         cancellationToken: cancellationToken);
     }
+
+    sentMessage = await botClient.SendTextMessageAsync(
+    chatId: chatId,
+    text: "Шо тебе надо?",
+    replyMarkup: replyKeyboardMarkup,
+    cancellationToken: cancellationToken);
 
 }
 
