@@ -52,15 +52,41 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
     cancellationToken: cancellationToken);
     }
 
-    if (messageText == "Стикер")
+    if (messageText == "Курс")
     {
         sentMessage = await botClient.SendTextMessageAsync(
         chatId: chatId,
-        photo: "https://github.com/TelegramBots/book/raw/master/src/docs/photo-ara.jpg",
-    caption: "<b>Ara bird</b>. <i>Source</i>: <a href=\"https://pixabay.com\">Pixabay</a>",
-    parseMode: ParseMode.Html,
+        text: "Да я сам не в курсе, программист пока непонятно чем занят, не написал он эту часть",
         cancellationToken: cancellationToken);
     }
+
+    if (messageText == "/help")
+    {
+        sentMessage = await botClient.SendTextMessageAsync(
+        chatId: chatId,
+        text: "Команды бота:\n" +
+        "кто ты\n" +
+        "Артур\n" +
+        "Курс\n",
+        cancellationToken: cancellationToken);
+    }
+
+    if (messageText == "кто ты")
+    {
+        sentMessage = await botClient.SendTextMessageAsync(
+        chatId: chatId,
+        text: "Да я ботяра, тупо пажилой жмых, пажилая чим чима, тупо крипочек",
+        cancellationToken: cancellationToken);
+    }
+
+    if (messageText != "/help" && messageText != "Курс" && messageText != "Артур" && messageText != "кто ты")
+    {
+        sentMessage = await botClient.SendTextMessageAsync(
+        chatId: chatId,
+        text: "это чо, я не понял",
+        cancellationToken: cancellationToken);
+    }
+
 }
 
 Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
