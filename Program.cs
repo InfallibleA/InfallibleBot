@@ -60,7 +60,7 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
     cancellationToken: cancellationToken);
     }
 
-    if (messageText == "Курс")
+    if (messageText == "$Курс€")
     {
         sentMessage = await botClient.SendTextMessageAsync(
         chatId: chatId,
