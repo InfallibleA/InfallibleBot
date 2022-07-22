@@ -41,7 +41,7 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
 
     Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
 
-    // Echo received message text
+    // Echo received message text вапвапывапывпрае
 
     ReplyKeyboardMarkup replyKeyboardMarkup = new(new[]
     {
