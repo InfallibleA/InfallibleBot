@@ -9,10 +9,9 @@ var botClient = new TelegramBotClient("5443542517:AAHu17EY5R92Xnq4qMVpSmcWIRz9Bu
 
 using var cts = new CancellationTokenSource();
 Message sentMessage;
-// StartReceiving does not block the caller thread. Receiving is done on the ThreadPool.
 var receiverOptions = new ReceiverOptions
 {
-    AllowedUpdates = Array.Empty<UpdateType>() // receive all update types
+    AllowedUpdates = Array.Empty<UpdateType>()
 };
 botClient.StartReceiving(
     updateHandler: HandleUpdateAsync,
@@ -26,22 +25,18 @@ var me = await botClient.GetMeAsync();
 Console.WriteLine($"Start listening for @{me.Username}");
 Console.ReadLine();
 
-// Send cancellation request to stop bot
 cts.Cancel();
 
 async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
 {
     if (update.Message is not { } message)
         return;
-    // Only process text messages
     if (message.Text is not { } messageText)
         return;
 
     var chatId = message.Chat.Id;
 
     Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
-
-    // Echo received message text вапвапывапывпрае рпопароhdfgh dfnghsd wqdweqfwefqw
 
     ReplyKeyboardMarkup replyKeyboardMarkup = new(new[]
     {
